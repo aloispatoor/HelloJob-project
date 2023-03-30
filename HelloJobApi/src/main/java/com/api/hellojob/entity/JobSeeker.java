@@ -20,6 +20,7 @@ public class JobSeeker {
     @ManyToMany(mappedBy = "jobseekers")
     @JsonIgnore
     private List<Offer> applications;
+    @Enumerated(EnumType.STRING)
     private List<ContractType> contractTypes;
 
     public JobSeeker() {

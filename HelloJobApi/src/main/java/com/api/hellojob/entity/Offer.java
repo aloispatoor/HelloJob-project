@@ -18,6 +18,7 @@ public class Offer {
     private String title;
     private String description;
     private Double salary;
+    @Enumerated(EnumType.STRING)
     private ContractType contractType;
     @CreationTimestamp
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
