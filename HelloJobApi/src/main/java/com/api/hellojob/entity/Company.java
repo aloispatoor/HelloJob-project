@@ -60,4 +60,8 @@ public class Company {
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
     }
+
+    public void addOffer(Offer offer) {
+        this.offers.add(offer);
+    }
 }
