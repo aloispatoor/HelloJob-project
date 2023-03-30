@@ -22,6 +22,7 @@ public class CompanyServiceTest {
     public void save_NominalCase(){
         Company company = new Company();
         company.setEmail("test@test.com");
+        company.setPassword("test123test");
         company.setName("Test Company");
         company.setLocation("Test City");
         companyRepository.save(company);

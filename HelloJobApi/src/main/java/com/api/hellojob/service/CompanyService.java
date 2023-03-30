@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -20,8 +21,8 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Company getCompanyById(Long id){
-        return companyRepository.findById(id).get();
+    public Optional<Company> getCompanyById(Long id){
+        return companyRepository.findById(id);
     }
 
     public Company addCompany(Company company){
@@ -38,6 +39,7 @@ public class CompanyService {
         Company newCompany = companyRepository.findById(company.getId()).orElse(null);
         if(newCompany != null){
             newCompany.setEmail(company.getEmail());
+            newCompany.setPassword(company.getPassword());
             newCompany.setName(company.getName());
             newCompany.setLocation(company.getLocation());
             companyRepository.save(newCompany);
