@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "companies")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +14,7 @@ public class Company {
     private String email;
     private String name;
     private String location;
-    @OneToMany(targetEntity = Offer.class, mappedBy = "company", orphanRemoval = true)
+    @OneToMany(targetEntity = Offer.class, mappedBy = "author", orphanRemoval = true)
     @JsonIgnore
     private List<Offer> offers;
 

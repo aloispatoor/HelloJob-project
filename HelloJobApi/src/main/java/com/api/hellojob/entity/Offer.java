@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "offers")
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +32,7 @@ public class Offer {
     @JsonIgnore
     private Company author;
     @ManyToMany
-    @JoinTable(name = "applicants_offer", joinColumns = { @JoinColumn(name = "offer_id") }, inverseJoinColumns = { @JoinColumn(name = "jobseeker_id") })
+    @JoinTable(name = "jobseekers_offers", joinColumns = { @JoinColumn(name = "offer_id") }, inverseJoinColumns = { @JoinColumn(name = "jobseeker_id") })
     @JsonIgnore
     private List<JobSeeker> applicants;
 

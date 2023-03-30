@@ -4,9 +4,11 @@ import com.api.hellojob.enumeration.ContractType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "jobseekers")
 public class JobSeeker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +19,9 @@ public class JobSeeker {
     private String title;
     private Boolean isAvailable;
     private String cv;
-    @ManyToMany(mappedBy = "jobseekers")
+    @ManyToMany(mappedBy = "applicants")
     @JsonIgnore
-    private List<Offer> applications;
+    private List<Offer> applications = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private List<ContractType> contractTypes;
 
