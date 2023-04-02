@@ -3,7 +3,6 @@ package com.api.hellojob.service;
 import com.api.hellojob.entity.JobSeeker;
 import com.api.hellojob.entity.Offer;
 import com.api.hellojob.repository.JobSeekerRepository;
-import com.api.hellojob.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
