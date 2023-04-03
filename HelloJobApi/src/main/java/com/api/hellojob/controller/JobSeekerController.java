@@ -43,6 +43,28 @@ public class JobSeekerController {
     }
 
 //    METHOD PUT
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<JobSeeker> updateCompany(@PathVariable Long id, @RequestBody JobSeeker candidate){
+        return jobSeekerService.getCandidateById(id)
+                .map(savedCandidate -> {
+                    savedCandidate.setEmail(candidate.getEmail());
+                    savedCandidate.setPassword(candidate.getPassword());
+                    savedCandidate.setFirstName(candidate.getFirstName());
+                    savedCandidate.setLastName(candidate.getLastName());
+                    savedCandidate.setCv(candidate.getCv());
+                    savedCandidate.setTitle(candidate.getTitle());
+                    savedCandidate.setAvailable(candidate.getAvailable());
+                    savedCandidate.setContractTypes(candidate.getContractTypes());
+                    JobSeeker newCandidate = jobSeekerService.updateCandidate(savedCandidate);
+                    return new ResponseEntity<>(newCandidate, HttpStatus.OK);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 //    METHOD DELETE
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCandidate(@PathVariable Long id){
+        jobSeekerService.deleteCandidate(id);
+        return new ResponseEntity<String>("Candidate removed successfully", HttpStatus.OK);
+    }
 }
