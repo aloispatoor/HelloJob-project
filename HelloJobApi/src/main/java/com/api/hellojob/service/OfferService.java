@@ -31,6 +31,18 @@ public class OfferService {
         return offerRepository.save(offer);
     }
 
+    public Offer updateOffer(Offer offer){
+        Offer newOffer = offerRepository.findById(offer.getId()).orElse(null);
+        if(newOffer != null){
+            newOffer.setTitle(offer.getTitle());
+            newOffer.setSalary(offer.getSalary());
+            newOffer.setDescription(offer.getDescription());
+            newOffer.setContractType(offer.getContractType());
+            offerRepository.save(newOffer);
+        }
+        return newOffer;
+    }
+
     public void deleteOffer(Long id){
         Offer offer = offerRepository.findById(id).orElse(null);
         Company currentCompany = new Company();
