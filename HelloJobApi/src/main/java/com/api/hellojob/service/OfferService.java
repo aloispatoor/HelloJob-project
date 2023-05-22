@@ -47,7 +47,7 @@ public class OfferService {
         Offer offer = offerRepository.findById(id).orElse(null);
         Company currentCompany = new Company();
         Company company = offer.getAuthor();
-        if(currentCompany == company){
+        if(currentCompany.equals(company)){
             offerRepository.deleteById(id);
             System.out.println("Offer " + id + " deleted successfully");
         }
