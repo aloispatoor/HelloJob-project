@@ -5,6 +5,7 @@ import com.api.hellojob.entity.Offer;
 import com.api.hellojob.repository.CompanyRepository;
 import com.api.hellojob.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class CompanyService {
     private CompanyRepository companyRepository;
     @Autowired
     private OfferRepository offerRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<Company> getAllCompanies(){
         return companyRepository.findAll();
@@ -26,6 +29,7 @@ public class CompanyService {
     }
 
     public Company addCompany(Company company){
+        company.setPassword(passwordEncoder.encode(company.getPassword()));
         return companyRepository.save(company);
     }
 
@@ -39,7 +43,7 @@ public class CompanyService {
         Company newCompany = companyRepository.findById(company.getId()).orElse(null);
         if(newCompany != null){
             newCompany.setEmail(company.getEmail());
-            newCompany.setPassword(company.getPassword());
+            newCompany.setPassword(passwordEncoder.encode(company.getPassword()));
             newCompany.setName(company.getName());
             newCompany.setLocation(company.getLocation());
             companyRepository.save(newCompany);

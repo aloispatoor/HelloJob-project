@@ -4,6 +4,7 @@ import com.api.hellojob.entity.JobSeeker;
 import com.api.hellojob.entity.Offer;
 import com.api.hellojob.repository.JobSeekerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.Optional;
 public class JobSeekerService {
     @Autowired
     private JobSeekerRepository jobSeekerRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<JobSeeker> getAllCandidates(){
         return jobSeekerRepository.findAll();
@@ -23,6 +26,7 @@ public class JobSeekerService {
     }
 
     public JobSeeker addCandidate(JobSeeker candidate){
+        candidate.setPassword(passwordEncoder.encode(candidate.getPassword()));
         return jobSeekerRepository.save(candidate);
     }
 
@@ -36,7 +40,7 @@ public class JobSeekerService {
         JobSeeker newCandidate = jobSeekerRepository.findById(candidate.getId()).orElse(null);
         if(newCandidate != null){
             newCandidate.setEmail(candidate.getEmail());
-            newCandidate.setPassword(candidate.getPassword());
+            newCandidate.setPassword(passwordEncoder.encode(candidate.getPassword()));
             newCandidate.setFirstName(candidate.getFirstName());
             newCandidate.setLastName(candidate.getLastName());
             newCandidate.setAvailable(candidate.getAvailable());
